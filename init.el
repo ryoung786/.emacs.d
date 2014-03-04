@@ -10,6 +10,9 @@
     (add-to-list 'package-archives '("etsy" . "http://localhost:8005/packages/") t))
 (package-initialize)
 
+(unless (file-exists-p "~/.emacs.d/elpa/archives/melpa")
+  (package-refresh-contents))
+
 (mapc
  (lambda (package)
    (if (not (package-installed-p package))
