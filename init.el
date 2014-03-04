@@ -23,9 +23,11 @@
    ;; themes
    molokai-theme zenburn-theme
    ;; packages that make editing text easier
-   yasnippet hungry-delete rainbow-mode whole-line-or-region
-   ;; etsy-specific stuff
-   etsy-starter-kit))
+   yasnippet hungry-delete rainbow-mode whole-line-or-region))
+
+(if IS_ETSY_ENV
+  (if (not (package-installed-p 'etsy-starter-kit))
+      (package-install 'etsy-starter-kit)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Set a couple bare minimums
