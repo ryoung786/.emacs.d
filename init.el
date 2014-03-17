@@ -22,7 +22,7 @@
    ;; language specific flymakes
    flymake-cursor flymake-jshint flymake-css
    ;; utilities
-   dired+ magit ein
+   dired+ magit ein ag
    ;; themes
    molokai-theme zenburn-theme
    ;; packages that make editing text easier
@@ -134,6 +134,19 @@
   (interactive)
   (scroll-up -1))
 
+;; ag settings
+(require 'ag)
+(setq ag-reuse-buffers t)
+(setq ag-reuse-window t)
+(setq my-ag-default-path (if IS_ETSY_ENV "/home/ryoung/development/Etsyweb" nil))
+(defun my-ag (string directory)
+  (interactive (list (read-from-minibuffer "Search string: " (ag/dwim-at-point))
+		     (if my-ag-default-path my-ag-default-path (read-directory-name "Directory: "))))
+  (window-configuration-to-register ?9)
+  (ag/search string directory)
+  (jump-to-register ?9)
+  (switch-to-buffer "*ag search*"))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Custom key bindings
 
@@ -153,6 +166,7 @@
 (global-set-key [f15] 'delete-trailing-whitespace)
 (global-set-key (kbd "ESC <right>") 'indent-rigid-by-4)
 (global-set-key (kbd "ESC <left>") 'unindent-rigid-by-4)
+(global-set-key (kbd "M-.") 'my-ag)
 
 (add-hook 'php-mode-hook (lambda ()
   (local-set-key (kbd "C-c C-p") 'flymake-goto-prev-error)
@@ -191,4 +205,3 @@
 
   (add-hook 'html-mode-hook (lambda () (setq indent-tabs-mode nil)))
   (add-hook 'html-mode-hook (lambda () (setq sgml-basic-offset 4))))
-
