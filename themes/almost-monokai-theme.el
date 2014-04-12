@@ -63,6 +63,13 @@
        '(region ((t (:background "#6DC5F1"))))
        '(ido-subdir ((t (:foreground "#F1266F"))))
        '(flymake-errline ((t (:background "red" :foreground "#F8F8F2"))))
+       '(rainbow-delimiters-depth-1-face ((t (:foreground "#F8F8F2"))))
+       '(rainbow-delimiters-depth-2-face ((t (:foreground "#90E5F8"))))
+       '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
+       '(rainbow-delimiters-depth-4-face ((t (:foreground "green"))))
+       '(rainbow-delimiters-depth-5-face ((t (:foreground "#F8A435"))))
+       '(rainbow-delimiters-depth-6-face ((t (:foreground "#433AF8"))))
+       '(rainbow-delimiters-depth-6-face ((t (:foreground "#FDA3D4"))))
        )
 ;;;###autoload
 (when load-file-name

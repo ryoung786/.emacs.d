@@ -22,7 +22,7 @@
    ;; language specific flymakes
    flymake-cursor flymake-jshint flymake-css
    ;; utilities
-   dired+ magit ein ag
+   dired+ magit ein ag ido-better-flex ido-ubiquitous
    ;; themes
    molokai-theme zenburn-theme
    ;; packages that make editing text easier
@@ -188,7 +188,7 @@
  ;; If there is more than one, they won't work right.
  )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Basic setup from etsy-startup-kit if I'm not on an etsy box
 
 (unless IS_ETSY_ENV
@@ -198,10 +198,26 @@
 
   (require 'flymake-css)
   (add-hook 'css-mode-hook (lambda () (setq indent-tabs-mode nil)))
-  (add-hook 'css-mode-hook (lambda () (rainbow-mode 1)))
+  (add-hook 'css-mode-hook 'rainbow-mode)
 
   (setq php-mode-force-pear 1) ;; gives us 4 spaces/tab and no tabs
-  (add-hook 'php-mode-hook (lambda () (flymake-mode 1)))
+  (add-hook 'php-mode-hook 'flymake-mode)
 
   (add-hook 'html-mode-hook (lambda () (setq indent-tabs-mode nil)))
   (add-hook 'html-mode-hook (lambda () (setq sgml-basic-offset 4))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Clojure config
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(add-hook 'cider-repl-mode-hook 'subword-mode)
+(add-hook 'cider-repl-mode-hook 'paredit-mode)
+(add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
+(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+(setq nrepl-hide-special-buffers t)
+(setq cider-repl-pop-to-buffer-on-connect nil)
+(setq cider-popup-stacktraces nil)
+(setq cider-repl-popup-stacktraces t)
+(setq cider-auto-select-error-buffer t)
+(setq nrepl-buffer-name-show-port t)
+(setq cider-repl-display-in-current-window t)
+(global-rainbow-delimiters-mode)
