@@ -7,7 +7,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (when IS_ETSY_ENV
-    (add-to-list 'package-archives '("etsy" . "http://localhost:8005/packages/") t))
+    (add-to-list 'package-archives '("etsy" . "http://emacs-package-server.ryoung.vm.ny4dev.etsy.com/packages/") t))
 (package-initialize)
 
 (unless (file-exists-p "~/.emacs.d/elpa/archives/melpa")
@@ -22,7 +22,7 @@
    ;; language specific flymakes
    flymake-cursor flymake-jshint flymake-css
    ;; utilities
-   dired+ magit ein ag ido-better-flex ido-ubiquitous
+   dired+ magit ein ag ido-better-flex ido-ubiquitous s
    ;; themes
    molokai-theme zenburn-theme
    ;; packages that make editing text easier
@@ -50,7 +50,8 @@
 ;;; Manage my non-default auto modes: alist modes,
 
 (when IS_ETSY_ENV
-    (require 'etsy-starter-kit))
+  (require 'etsy-starter-kit)
+  (global-set-key (kbd "C-c j") 'etsy-find-resource))
 (add-to-list 'auto-mode-alist (cons "\\.tpl\\'" 'html-mode))
 (setq whitespace-line-column 120)
 (require 'saveplace)
@@ -133,6 +134,17 @@
 (defun scroll-down-one ()
   (interactive)
   (scroll-up -1))
+
+(defun scroll-right-one ()
+  (interactive)
+  (scroll-right 1))
+
+(defun scroll-left-one ()
+  (interactive)
+  (scroll-left 1))
+
+;; geben settings
+(setq geben-pause-at-entry-line nil)
 
 ;; ag settings
 (require 'ag)
